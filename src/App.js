@@ -1,4 +1,4 @@
-import { query, collection, onSnapshot, QuerySnapshot } from 'firebase/firestore';
+import { query, collection, onSnapshot, QuerySnapshot, updateDoc, doc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai'
 import Todo from './Todo';
@@ -33,6 +33,11 @@ function App() {
   }, [])
 
   // Update todo in firebase
+  const toggleComplete = async (todo) => {
+    await updateDoc(doc(db, 'todos', todo.id), {
+      completed: !todo.completed
+    })
+  }
 
   // Delete todo
 
@@ -47,7 +52,7 @@ function App() {
         </form>
         <ul>
           {todos.map((todo, index) => (
-            <Todo key={index} todo={todo}/>
+            <Todo key={index} todo={todo} toggleComplete={toggleComplete} />
           ))}
         </ul>
         <p className={style.count}>You have 2 Todos</p>
