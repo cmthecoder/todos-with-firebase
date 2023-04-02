@@ -2,7 +2,6 @@ import {
   query,
   collection,
   onSnapshot,
-  QuerySnapshot,
   updateDoc,
   doc,
   addDoc,
@@ -30,7 +29,8 @@ function App() {
   // Create todo
   const createTodo = async (e) => {
     e.preventDefault(e);
-    if (input === "") {
+
+    if (input === '') {
       alert("Please enter details");
       return;
     }
@@ -40,7 +40,7 @@ function App() {
       completed: false,
     });
 
-    setInput("");
+    setInput('');
   };
 
   // Read todo from firebase
@@ -66,7 +66,7 @@ function App() {
   // Delete todo
   const deleteTodo = async (id) => {
     await deleteDoc(doc(db, 'todos', id))
-    
+
   }
 
   return (
